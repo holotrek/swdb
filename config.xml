@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>StarWarsPE</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+    <name>Star Wars PE (Pocket Edition)</name>
+    <description>A directory of Star Wars information in your pocket. Data provided by Star Wars API (https://swapi.co) and Images courtesy of Wookieepedia (http://starwars.wikia.com).</description>
+    <author email="evshell18@gmail.com" href="https://holotrek.github.io/">Evan Kaiser</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

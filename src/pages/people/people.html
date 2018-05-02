@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>
+            <ion-icon name="contacts"></ion-icon>
+            Characters
+        </ion-title>
+    </ion-navbar>
+    <ion-toolbar color="primary">
+        <ion-searchbar [(ngModel)]="curSearch" (ionInput)="search($event)" placeholder="Search Characters..." showCancelButton color="danger"></ion-searchbar>
+        <ion-badge color="warning" *ngIf="curSearch && curSearch.length < 2">Input at least 2 letters to search...</ion-badge>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-refresher (ionRefresh)="forceReload()">
+        <ion-refresher-content refreshingText="Reloading from API...">
+        </ion-refresher-content>
+    </ion-refresher>
+
+    <ion-list>
+        <ion-item *ngFor="let i of items">
+            <ion-thumbnail item-start>
+                <star-wars-thumbnail [name]="i.name" fallbackIcon="contact"></star-wars-thumbnail>
+            </ion-thumbnail>
+            {{i.name}}
+            <ion-icon item-end name="arrow-round-forward"></ion-icon>
+        </ion-item>
+    </ion-list>
+
+    <ion-infinite-scroll (ionInfinite)="$event.waitFor(loadMore())">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

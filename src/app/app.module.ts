@@ -3,18 +3,14 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import * as GoogleImages from 'google-images';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { CacheModule } from 'ionic-cache';
 
-import { ComponentsModule } from '../components/components.module';
 import { HomePage } from '../pages/home/home';
 import { PeoplePageModule } from '../pages/people/people.module';
-import { StarWarsThumbnailProvider } from '../providers/star-wars-thumbnail/star-wars-thumbnail';
+import { PersonPageModule } from '../pages/person/person.module';
 import { SwapiProvider } from '../providers/swapi/swapi';
 import { MyApp } from './app.component';
-
-const GoogleImagesClient = new GoogleImages('011698350505404100665:cunn7b5iov8', 'AIzaSyDO-AsVGzLEUD-qA_z3u1wN8_bOiJWykgM');
 
 @NgModule({
     declarations: [
@@ -26,8 +22,8 @@ const GoogleImagesClient = new GoogleImages('011698350505404100665:cunn7b5iov8',
         HttpClientModule,
         CacheModule.forRoot(),
         IonicModule.forRoot(MyApp),
-        ComponentsModule,
-        PeoplePageModule
+        PeoplePageModule,
+        PersonPageModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [
@@ -38,9 +34,7 @@ const GoogleImagesClient = new GoogleImages('011698350505404100665:cunn7b5iov8',
         StatusBar,
         SplashScreen,
         { provide: ErrorHandler, useClass: IonicErrorHandler },
-        SwapiProvider,
-        StarWarsThumbnailProvider,
-        { provide: GoogleImages, useValue: GoogleImagesClient }
+        SwapiProvider
     ]
 })
 export class AppModule { }

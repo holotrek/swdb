@@ -21,10 +21,7 @@
     </ion-refresher>
 
     <ion-list>
-        <ion-item *ngFor="let i of items">
-            <ion-thumbnail item-start>
-                <star-wars-thumbnail [name]="i.name" fallbackIcon="contact"></star-wars-thumbnail>
-            </ion-thumbnail>
+        <ion-item *ngFor="let i of items" (click)="viewDetails(i)">
             {{i.name}}
             <ion-icon item-end name="arrow-round-forward"></ion-icon>
         </ion-item>

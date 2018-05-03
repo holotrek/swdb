@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
 import { Person, SWAPI_CACHE_KEYS, SwapiProvider } from '../../providers/swapi/swapi';
+import { PersonPage } from '../person/person';
 
 /**
  * Generated class for the PeoplePage page.
@@ -37,7 +38,7 @@ export class PeoplePage {
             message: search ? 'Searching...' : 'Loading...'
         });
         loading.present().then(() => 
-            this.swapiProvider.getPeople(search).then(res => {
+            this.swapiProvider.searchPeople(search).then(res => {
                 this.items = res.results;
                 this.next = res.next;
             }))
@@ -48,7 +49,7 @@ export class PeoplePage {
         if (!this.next) {
             return Promise.resolve();
         }
-        return this.swapiProvider.getPeoplePage(this.next).then(res => {
+        return this.swapiProvider.getPeople(this.next).then(res => {
             this.items = this.items.concat(res.results);
             this.next = res.next;
         });
@@ -67,5 +68,12 @@ export class PeoplePage {
     forceReload() {
         this.swapiProvider.clearCache(SWAPI_CACHE_KEYS.people);
         this.load();
+    }
+
+    viewDetails(person: Person) {
+        this.navCtrl.push(PersonPage, {
+            name: person.name,
+            url: person.url
+        });
     }
 }

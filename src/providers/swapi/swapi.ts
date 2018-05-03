@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CacheService } from 'ionic-cache';
+import { Observable } from 'rxjs/Observable';
 
 /*
   Generated class for the SwapiProvider provider.
@@ -22,24 +23,43 @@ export class SwapiProvider {
         this.cache.clearGroup(key);
     }
 
-    getPeople(name?: string, forceReload?: boolean): Promise<SwapiCollection<Person>> {
+    searchPeople(name?: string, forceReload?: boolean): Promise<SwapiCollection<Person>> {
         const search = name ? `?search=${name}` : '';
         const url = `${this._apiUrl}people${search}`;
         const request = this.http.get<SwapiCollection<Person>>(url);
-        const items = this.cache.loadFromObservable(url, request, SWAPI_CACHE_KEYS.people);
+        const items = this.cache.loadFromObservable(url, request, SWAPI_CACHE_KEYS.people) as Observable<SwapiCollection<Person>>;
         return items.toPromise();
     }
 
-    getPeoplePage(url: string): Promise<SwapiCollection<Person>> {
-        const request = this.http.get<SwapiCollection<Person>>(url);
-        const items = this.cache.loadFromObservable(url, request, SWAPI_CACHE_KEYS.people);
+    getPeople(url: string): Promise<SwapiCollection<Person>> {
+        return this.getCollection<Person>(url, SWAPI_CACHE_KEYS.people);
+    }
+
+    getPerson(url: string): Promise<Person> {
+        return this.getSingle<Person>(url, SWAPI_CACHE_KEYS.people);
+    }
+
+    getSpecie(url: string): Promise<Species> {
+        return this.getSingle<Species>(url, SWAPI_CACHE_KEYS.species);
+    }
+
+    private getSingle<E extends SwapiEntity>(url: string, cacheKey: string): Promise<E> {
+        const request = this.http.get<E>(url);
+        const items = this.cache.loadFromObservable(url, request, cacheKey) as Observable<E>;
+        return items.toPromise();
+    }
+
+    private getCollection<E extends SwapiEntity>(url: string, cacheKey: string): Promise<SwapiCollection<E>> {
+        const request = this.http.get<SwapiCollection<E>>(url);
+        const items = this.cache.loadFromObservable(url, request, cacheKey) as Observable<SwapiCollection<E>>;
         return items.toPromise();
     }
 
 }
 
 export const SWAPI_CACHE_KEYS = {
-    people: 'swapi-people'
+    people: 'swapi-people',
+    species: 'swapi-species'
 };
 
 export interface SwapiCollection<T> {
@@ -69,4 +89,17 @@ export interface Person extends SwapiEntity {
     species: string[];
     vehicles: string[];
     starships: string[];
+}
+
+export interface Species extends SwapiEntity {
+    name: string;
+	classification: string;
+	designation: string;
+	average_height: string;
+	skin_colors: string;
+	hair_colors: string;
+	eye_colors: string;
+	average_lifespan: string;
+	homeworld: string;
+	language: string;
 }

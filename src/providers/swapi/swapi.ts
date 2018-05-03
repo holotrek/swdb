@@ -47,6 +47,10 @@ export class SwapiProvider {
         return this.getSingle<Film>(url, SWAPI_CACHE_KEYS.films);
     }
 
+    getPlanet(url: string): Promise<Planet> {
+        return this.getSingle<Planet>(url, SWAPI_CACHE_KEYS.planets);
+    }
+
     private getSingle<E extends SwapiEntity>(url: string, cacheKey: string): Promise<E> {
         const request = this.http.get<E>(url);
         const items = this.cache.loadFromObservable(url, request, cacheKey) as Observable<E>;
@@ -64,7 +68,8 @@ export class SwapiProvider {
 export const SWAPI_CACHE_KEYS = {
     people: 'swapi-people',
     species: 'swapi-species',
-    films: 'swapi-films'
+    films: 'swapi-films',
+    planets: 'swapi-planets'
 };
 
 export interface SwapiCollection<T> {
@@ -116,4 +121,16 @@ export interface Film extends SwapiEntity {
     director: string;
     producer: string;
     release_date: string;
+}
+
+export interface Planet extends SwapiEntity {
+    name: string;
+    rotation_period: string;
+    orbital_period: string;
+    diameter: string;
+    climate: string;
+    gravity: string;
+    terrain: string;
+    surface_water: string;
+    population: string;
 }

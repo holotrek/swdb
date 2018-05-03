@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { IonicModule } from 'ionic-angular';
 
 import { FilmsComponent } from './films/films';
+import { OriginComponent } from './origin/origin';
 import { PersonDetailsComponent } from './person-details/person-details';
 import { SpeciesNameComponent } from './species-name/species-name';
 
@@ -10,7 +11,8 @@ import { SpeciesNameComponent } from './species-name/species-name';
 	declarations: [
 		SpeciesNameComponent,
 		PersonDetailsComponent,
-		FilmsComponent
+		FilmsComponent,
+		OriginComponent
 	],
 	imports: [
 		CommonModule,
@@ -19,7 +21,8 @@ import { SpeciesNameComponent } from './species-name/species-name';
 	exports: [
 		SpeciesNameComponent,
 		PersonDetailsComponent,
-		FilmsComponent
+		FilmsComponent,
+		OriginComponent
 	]
 })
 export class ComponentsModule { }

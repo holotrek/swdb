@@ -1,21 +1,22 @@
 import { Component, Input } from '@angular/core';
 import { ToastController } from 'ionic-angular';
 
-import { Person, SwapiProvider } from '../../providers/swapi/swapi';
+import { Person, Planet, SwapiProvider } from '../../providers/swapi/swapi';
 
 /**
- * Generated class for the PersonDetailsComponent component.
+ * Generated class for the OriginComponent component.
  *
  * See https://angular.io/api/core/Component for more info on Angular
  * Components.
  */
 @Component({
-    selector: 'person-details',
-    templateUrl: 'person-details.html'
+    selector: 'origin',
+    templateUrl: 'origin.html'
 })
-export class PersonDetailsComponent {
+export class OriginComponent {
 
     person: Promise<Person>;
+    homeworld: Promise<Planet>;
 
     @Input() set url(url: string) {
         if (url) {
@@ -29,12 +30,13 @@ export class PersonDetailsComponent {
     ) {
     }
 
-    async load(url: string) {
+    load(url: string) {
         let loading = this.toast.create({
-            message: 'Loading Details...'
+            message: 'Loading Origin...'
         });
         this.person = loading.present().then(() => this.swapiProvider.getPerson(url));
-        this.person.then(() => loading.dismiss());
+        this.homeworld = this.person.then(p => this.swapiProvider.getPlanet(p.homeworld));
+        this.homeworld.then(() => loading.dismiss());
     }
 
 }

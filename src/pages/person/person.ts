@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-
-import { Person, SwapiProvider, Species, SWAPI_CACHE_KEYS } from '../../providers/swapi/swapi';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
  * Generated class for the PersonPage page.
@@ -17,27 +15,17 @@ import { Person, SwapiProvider, Species, SWAPI_CACHE_KEYS } from '../../provider
 })
 export class PersonPage {
     name: string;
-    person: Promise<Person>;
+    url: string;
 
     constructor(
         private navCtrl: NavController, 
-        private navParams: NavParams,
-        private swapiProvider: SwapiProvider,
-        private toast: ToastController
+        private navParams: NavParams
     ) {
     }
 
     ionViewDidLoad() {
         this.name = this.navParams.get('name');
-        this.load(this.navParams.get('url'));
-    }
-
-    load(url: string) {
-        let loading = this.toast.create({
-            message: 'Loading Details...'
-        });
-        this.person = loading.present().then(() => this.swapiProvider.getPerson(url));
-        this.person.then(p => loading.dismiss());
+        this.url = this.navParams.get('url');
     }
 
 }

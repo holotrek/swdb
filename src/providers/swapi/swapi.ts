@@ -43,6 +43,10 @@ export class SwapiProvider {
         return this.getSingle<Species>(url, SWAPI_CACHE_KEYS.species);
     }
 
+    getFilm(url: string): Promise<Film> {
+        return this.getSingle<Film>(url, SWAPI_CACHE_KEYS.films);
+    }
+
     private getSingle<E extends SwapiEntity>(url: string, cacheKey: string): Promise<E> {
         const request = this.http.get<E>(url);
         const items = this.cache.loadFromObservable(url, request, cacheKey) as Observable<E>;
@@ -59,7 +63,8 @@ export class SwapiProvider {
 
 export const SWAPI_CACHE_KEYS = {
     people: 'swapi-people',
-    species: 'swapi-species'
+    species: 'swapi-species',
+    films: 'swapi-films'
 };
 
 export interface SwapiCollection<T> {
@@ -102,4 +107,13 @@ export interface Species extends SwapiEntity {
 	average_lifespan: string;
 	homeworld: string;
 	language: string;
+}
+
+export interface Film extends SwapiEntity {
+    title: string;
+    episode_id: number;
+    opening_crawl: string;
+    director: string;
+    producer: string;
+    release_date: string;
 }

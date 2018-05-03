@@ -1,0 +1,17 @@
+films {
+    ion-slides {
+        background-color: map-get($colors, 'dark');
+        ion-slide {
+            padding-top: 10px;
+            img {
+                max-height: 100vh !important;
+                width: auto;
+                margin: 0 auto 40px auto;
+                display: block;
+            }
+            h3 {
+                margin: 10px;
+            }
+        }
+    }
+}

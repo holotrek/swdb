@@ -18,3 +18,16 @@
 ion-icon.custom {
     max-width: 24px;
 }
+
+ion-card {
+    ion-card-header.border-bottom {
+        margin-bottom: 10px;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        @each $name, $value in $colors {
+            &.#{$name} {
+                border-bottom-color: $value;
+            }
+        }
+    }
+}

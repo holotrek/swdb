@@ -1,0 +1,8 @@
+<ion-slides *ngIf="films && films.length" autoplay="5000" loop pager>
+    <ion-slide *ngFor="let f of films">
+        <div text-center>
+            <h3 ion-text color="light">Ep. {{f.episode_id}} - {{f.title}}</h3>
+            <img [src]="'assets/imgs/movie-poster' + f.episode_id + '.jpg'" [title]="f.title" />
+        </div>
+    </ion-slide>
+</ion-slides>

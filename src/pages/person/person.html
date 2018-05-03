@@ -17,45 +17,29 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-card>
-        <ion-card-header color="primary">
-            Physical Attributes
-        </ion-card-header>
-        <ion-card-content>
-            <ion-list *ngIf="person | async as p">
-                <ion-item>
-                    <ion-icon item-start class="custom">📏</ion-icon>
-                    <ion-label>Height</ion-label>
-                    <ion-badge item-right>{{p.height}} cm</ion-badge>
-                </ion-item>
-                <ion-item>
-                    <ion-icon item-start class="custom">
-                        <i class="fa fa-balance-scale"></i>
-                    </ion-icon>
-                    <ion-label>Mass</ion-label>
-                    <ion-badge item-right>{{p.mass}} kg</ion-badge>
-                </ion-item>
-                <ion-item>
-                    <ion-icon [name]="p.gender" item-start></ion-icon>
-                    <ion-label>Gender</ion-label>
-                    <ion-badge item-right>{{p.gender}}</ion-badge>
-                </ion-item>
-                <ion-item>
-                    <ion-icon name="brush" item-start></ion-icon>
-                    <ion-label>Hair Color</ion-label>
-                    <ion-badge item-right>{{p.hair_color}}</ion-badge>
-                </ion-item>
-                <ion-item>
-                    <ion-icon name="hand" item-start></ion-icon>
-                    <ion-label>Skin Color</ion-label>
-                    <ion-badge item-right>{{p.skin_color}}</ion-badge>
-                </ion-item>
-                <ion-item>
-                    <ion-icon name="eye" item-start></ion-icon>
-                    <ion-label>Eye Color</ion-label>
-                    <ion-badge item-right>{{p.eye_color}}</ion-badge>
-                </ion-item>
-            </ion-list>
-        </ion-card-content>
-    </ion-card>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2>
+                <ion-card>
+                    <ion-card-header color="primary" class="border-bottom light">
+                        Appeared In
+                    </ion-card-header>
+                    <ion-card-content>
+                        <films [url]="url"></films>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+
+            <ion-col col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2>
+                <ion-card class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                    <ion-card-header color="primary" class="border-bottom light">
+                        Physical Attributes
+                    </ion-card-header>
+                    <ion-card-content>
+                        <person-details [url]="url" *ngIf="url"></person-details>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

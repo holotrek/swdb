@@ -1,4 +1,4 @@
-<ion-slides *ngIf="films && films.length" autoplay="5000" loop pager>
+<ion-slides *ngIf="films && films.length" [autoplay]="films.length > 1 ? 5000 : null" [loop]="films.length > 1" pager>
     <ion-slide *ngFor="let f of films">
         <div text-center>
             <h3 ion-text color="light">Ep. {{f.episode_id}} - {{f.title}}</h3>

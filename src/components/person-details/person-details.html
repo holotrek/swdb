@@ -17,7 +17,10 @@
         <ion-badge item-right>{{p.mass}} kg</ion-badge>
     </ion-item>
     <ion-item>
-        <ion-icon [name]="p.gender" item-start></ion-icon>
+        <ion-icon *ngIf="p.gender !== 'n/a'" [name]="p.gender" item-start></ion-icon>
+        <ion-icon *ngIf="p.gender === 'n/a'" item-start class="custom">
+            <i class="fa fa-venus-mars"></i>
+        </ion-icon>
         <ion-label>Gender</ion-label>
         <ion-badge item-right>{{p.gender}}</ion-badge>
     </ion-item>

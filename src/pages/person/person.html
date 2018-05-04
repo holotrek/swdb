@@ -11,7 +11,7 @@
         </button>
         <ion-title>
             <ion-icon name="contact"></ion-icon>
-            {{name}}
+            <span>{{name}}</span>
         </ion-title>
     </ion-navbar>
 </ion-header>
@@ -28,6 +28,7 @@
         </ion-card>
         
         <ion-card class="pin">
+            <img [src]="'assets/imgs/planets' + randomImage + '.jpg'"/>
             <ion-card-content>
                 <origin [person]="p"></origin>
             </ion-card-content>

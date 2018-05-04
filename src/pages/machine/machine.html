@@ -10,14 +10,17 @@
             <ion-icon name="menu"></ion-icon>
         </button>
         <ion-title>
-            <ion-icon [name]="type === 'starships' ? 'jet' : 'car'"></ion-icon>
-            {{name}}
+            <ion-icon *ngIf="type==='starships'" name="jet"></ion-icon>
+            <ion-icon *ngIf="type!=='starships'" class="custom">
+                <i class="fa fa-motorcycle"></i>
+            </ion-icon>
+            <span>{{name}}</span>
         </ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding>
     <div *ngIf="machine | async as m">
-        <machine-details [machine]="m"></machine-details>
+        <machine-details [machine]="m" [type]="type"></machine-details>
     </div>
 </ion-content>

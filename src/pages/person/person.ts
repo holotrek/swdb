@@ -18,6 +18,7 @@ import { SwapiProvider, Person } from '../../providers/swapi/swapi';
 export class PersonPage {
     name: string;
     person: Promise<Person>;
+    randomImage = 1;
 
     constructor(
         private navCtrl: NavController,
@@ -25,6 +26,7 @@ export class PersonPage {
         private swapiProvider: SwapiProvider,
         private toast: ToastController
     ) {
+        this.randomImage = Math.floor(Math.random() * 9) + 1;
     }
 
     ionViewDidLoad() {

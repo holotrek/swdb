@@ -4,7 +4,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Nav, Platform } from 'ionic-angular';
 import { CacheService } from 'ionic-cache';
 
-import { HomePage } from '../pages/home/home';
 import { PeoplePage } from '../pages/people/people';
 
 @Component({
@@ -13,7 +12,7 @@ import { PeoplePage } from '../pages/people/people';
 export class MyApp {
     @ViewChild(Nav) nav: Nav;
 
-    rootPage: any = HomePage;
+    rootPage: any = PeoplePage;
 
     pages: Array<{ title: string, component: any, icon: string }>;
 
@@ -27,7 +26,6 @@ export class MyApp {
 
         // used for an example of ngFor and navigation
         this.pages = [
-            { title: 'Home', component: HomePage, icon: 'home' },
             { title: 'Characters', component: PeoplePage, icon: 'contacts' }
         ];
 

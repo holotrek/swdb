@@ -19,6 +19,12 @@ ion-icon.custom {
     max-width: 24px;
 }
 
+ion-title {
+    ion-icon.custom + span {
+        margin-left: 5px;
+    }
+}
+
 ion-card {
     ion-card-header.border-bottom {
         margin-bottom: 10px;
@@ -31,17 +37,3 @@ ion-card {
         }
     }
 }
-
-// .ios, .md {
-//     @media (min-width: 768px) {
-//         .pins {
-//             column-count: 3;
-
-//             .pin {
-//                 display: inline-block;
-//                 margin: 0 2px 10px;
-//                 padding: 5px;
-//             }
-//         }
-//     }
-// }

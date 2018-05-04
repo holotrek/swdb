@@ -1,5 +1,22 @@
 <div *ngIf="homeworld | async as h">
     <p>
-        {{person.name}} was born in {{person.birth_year}} on the planet of {{h.name}}. {{h.name}} is a planet of {{h.terrain.toLowerCase()}}, with a population of {{h.population | number}} and a gravity of {{h.gravity}} unit.
+        <span *ngIf="person.birth_year && person.birth_year !== 'unknown'">
+            {{person.name}} was born in {{person.birth_year}} on the planet of {{h.name}}.
+        </span>
+        <span *ngIf="!person.birth_year || person.birth_year === 'unknown'">
+            {{person.name}} was from the planet of {{h.name}}.
+        </span>
+        <span>
+            {{h.name}} is a planet of {{h.terrain.toLowerCase()}}, 
+        </span>
+        <span *ngIf="h.population && h.population !== 'unknown'">
+            with a population of {{h.population | number}}
+        </span>
+        <span *ngIf="!h.population || h.population === 'unknown'">
+            with an unknown population
+        </span>
+        <span>
+            and a gravity of {{h.gravity}} unit.
+        </span>
     </p>
 </div>

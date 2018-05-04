@@ -15,5 +15,6 @@ import { Machine } from '../../providers/swapi/swapi';
 export class MachineDetailsComponent {
 
     @Input() machine: Machine;
+    @Input() type: string;
 
 }

@@ -17,48 +17,50 @@
 </ion-header>
 
 <ion-content padding>
-    <div *ngIf="person | async as p" class="pins">
-        <ion-card class="pin">
-            <ion-card-header color="primary" class="border-bottom light">
-                Appeared In
-            </ion-card-header>
-            <ion-card-content>
-                <films [person]="p"></films>
-            </ion-card-content>
-        </ion-card>
-        
-        <ion-card class="pin">
-            <img [src]="'assets/imgs/planets' + randomImage + '.jpg'"/>
-            <ion-card-content>
-                <origin [person]="p"></origin>
-            </ion-card-content>
-        </ion-card>
+    <ion-row *ngIf="person | async as p">
+        <ion-col col-12 col-md-8 col-lg-6 col-xl-4 offset-md-2 offset-lg-3 offset-xl-4>
+            <ion-card class="pin">
+                <ion-card-header color="primary" class="border-bottom light">
+                    Appeared In
+                </ion-card-header>
+                <ion-card-content>
+                    <films [person]="p"></films>
+                </ion-card-content>
+            </ion-card>
+            
+            <ion-card class="pin">
+                <img [src]="'assets/imgs/planets' + randomImage + '.jpg'"/>
+                <ion-card-content>
+                    <origin [person]="p"></origin>
+                </ion-card-content>
+            </ion-card>
 
-        <ion-card class="pin">
-            <ion-card-header color="primary" class="border-bottom light">
-                Physical Attributes
-            </ion-card-header>
-            <ion-card-content>
-                <person-details [person]="p"></person-details>
-            </ion-card-content>
-        </ion-card>
+            <ion-card class="pin">
+                <ion-card-header color="primary" class="border-bottom light">
+                    Physical Attributes
+                </ion-card-header>
+                <ion-card-content>
+                    <person-details [person]="p"></person-details>
+                </ion-card-content>
+            </ion-card>
 
-        <ion-card class="pin">
-            <ion-card-header color="primary" class="border-bottom light">
-                Vehicles Piloted
-            </ion-card-header>
-            <ion-card-content>
-                <machines [person]="p" type="vehicles"></machines>
-            </ion-card-content>
-        </ion-card>
+            <ion-card class="pin">
+                <ion-card-header color="primary" class="border-bottom light">
+                    Vehicles Piloted
+                </ion-card-header>
+                <ion-card-content>
+                    <machines [person]="p" type="vehicles"></machines>
+                </ion-card-content>
+            </ion-card>
 
-        <ion-card class="pin">
-            <ion-card-header color="primary" class="border-bottom light">
-                Starships Piloted
-            </ion-card-header>
-            <ion-card-content>
-                <machines [person]="p" type="starships"></machines>
-            </ion-card-content>
-        </ion-card>
-    </div>
+            <ion-card class="pin">
+                <ion-card-header color="primary" class="border-bottom light">
+                    Starships Piloted
+                </ion-card-header>
+                <ion-card-content>
+                    <machines [person]="p" type="starships"></machines>
+                </ion-card-content>
+            </ion-card>
+        </ion-col>
+    </ion-row>
 </ion-content>

@@ -21,8 +21,8 @@ export class MachinePage {
     machine: Promise<Machine>;
 
     constructor(
-        public navCtrl: NavController,
-        public navParams: NavParams,
+        private navCtrl: NavController,
+        private navParams: NavParams,
         private swapiProvider: SwapiProvider,
         private toast: ToastController
     ) {

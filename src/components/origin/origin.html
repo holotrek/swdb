@@ -1,7 +1,5 @@
-<div *ngIf="person | async as p">
-    <div *ngIf="homeworld | async as h">
-        <p>
-            {{p.name}} was born in {{p.birth_year}} on the planet of {{h.name}}. {{h.name}} is a planet of {{h.terrain.toLowerCase()}}, with a population of {{h.population | number}} and a gravity of {{h.gravity}} unit.
-        </p>
-    </div>
+<div *ngIf="homeworld | async as h">
+    <p>
+        {{person.name}} was born in {{person.birth_year}} on the planet of {{h.name}}. {{h.name}} is a planet of {{h.terrain.toLowerCase()}}, with a population of {{h.population | number}} and a gravity of {{h.gravity}} unit.
+    </p>
 </div>

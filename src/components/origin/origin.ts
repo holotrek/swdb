@@ -15,14 +15,17 @@ import { Person, Planet, SwapiProvider } from '../../providers/swapi/swapi';
 })
 export class OriginComponent {
 
-    person: Promise<Person>;
-    homeworld: Promise<Planet>;
-
-    @Input() set url(url: string) {
-        if (url) {
-            this.load(url);
-        }
+    private _person: Person;
+    @Input() set person(p: Person) {
+        this._person = p;
+        this.load();
     }
+
+    get person(): Person {
+        return this._person;
+    }
+
+    homeworld: Promise<Planet>;
 
     constructor(
         private swapiProvider: SwapiProvider,
@@ -30,12 +33,11 @@ export class OriginComponent {
     ) {
     }
 
-    load(url: string) {
+    load() {
         let loading = this.toast.create({
-            message: 'Loading Origin...'
+            message: 'Loading origin...'
         });
-        this.person = loading.present().then(() => this.swapiProvider.getPerson(url));
-        this.homeworld = this.person.then(p => this.swapiProvider.getPlanet(p.homeworld));
+        this.homeworld = loading.present().then(() => this.swapiProvider.getPlanet(this.person.homeworld));
         this.homeworld.then(() => loading.dismiss());
     }
 

@@ -17,19 +17,19 @@
 </ion-header>
 
 <ion-content padding>
-    <div class="pins">
+    <div *ngIf="person | async as p" class="pins">
         <ion-card class="pin">
             <ion-card-header color="primary" class="border-bottom light">
                 Appeared In
             </ion-card-header>
             <ion-card-content>
-                <films [url]="url"></films>
+                <films [person]="p"></films>
             </ion-card-content>
         </ion-card>
         
         <ion-card class="pin">
             <ion-card-content>
-                <origin [url]="url"></origin>
+                <origin [person]="p"></origin>
             </ion-card-content>
         </ion-card>
 
@@ -38,7 +38,25 @@
                 Physical Attributes
             </ion-card-header>
             <ion-card-content>
-                <person-details [url]="url" *ngIf="url"></person-details>
+                <person-details [person]="p"></person-details>
+            </ion-card-content>
+        </ion-card>
+
+        <ion-card class="pin">
+            <ion-card-header color="primary" class="border-bottom light">
+                Vehicles Piloted
+            </ion-card-header>
+            <ion-card-content>
+                <machines [person]="p" type="vehicles"></machines>
+            </ion-card-content>
+        </ion-card>
+
+        <ion-card class="pin">
+            <ion-card-header color="primary" class="border-bottom light">
+                Starships Piloted
+            </ion-card-header>
+            <ion-card-content>
+                <machines [person]="p" type="starships"></machines>
             </ion-card-content>
         </ion-card>
     </div>

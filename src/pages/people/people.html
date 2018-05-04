@@ -15,7 +15,7 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-refresher (ionRefresh)="forceReload()">
+    <ion-refresher (ionRefresh)="forceReload($event)">
         <ion-refresher-content refreshingText="Reloading from API...">
         </ion-refresher-content>
     </ion-refresher>

@@ -51,6 +51,14 @@ export class SwapiProvider {
         return this.getSingle<Planet>(url, SWAPI_CACHE_KEYS.planets);
     }
 
+    getVehicle(url: string): Promise<Vehicle> {
+        return this.getSingle<Vehicle>(url, SWAPI_CACHE_KEYS.vehicles);
+    }
+
+    getStarship(url: string): Promise<Starship> {
+        return this.getSingle<Starship>(url, SWAPI_CACHE_KEYS.starships);
+    }
+
     private getSingle<E extends SwapiEntity>(url: string, cacheKey: string): Promise<E> {
         const request = this.http.get<E>(url);
         const items = this.cache.loadFromObservable(url, request, cacheKey) as Observable<E>;
@@ -69,7 +77,9 @@ export const SWAPI_CACHE_KEYS = {
     people: 'swapi-people',
     species: 'swapi-species',
     films: 'swapi-films',
-    planets: 'swapi-planets'
+    planets: 'swapi-planets',
+    vehicles: 'swapi-vehicles',
+    starships: 'swapi-starships'
 };
 
 export interface SwapiCollection<T> {
@@ -133,4 +143,27 @@ export interface Planet extends SwapiEntity {
     terrain: string;
     surface_water: string;
     population: string;
+}
+
+export interface Machine extends SwapiEntity {
+    name: string;
+    model: string;
+    manufacturer: string;
+    cost_in_credits: string;
+    length: string;
+    max_atmosphering_speed: string;
+    crew: string;
+    passengers: string;
+    cargo_capacity: string;
+    consumables: string;
+}
+
+export interface Vehicle extends Machine {
+    vehicle_class: string;
+}
+
+export interface Starship extends Machine {
+    hyperdrive_rating: string;
+    MGLT: string;
+    starship_class: string;
 }

@@ -7,6 +7,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { CacheModule } from 'ionic-cache';
 
 import { HomePage } from '../pages/home/home';
+import { MachinePageModule } from '../pages/machine/machine.module';
 import { PeoplePageModule } from '../pages/people/people.module';
 import { PersonPageModule } from '../pages/person/person.module';
 import { SwapiProvider } from '../providers/swapi/swapi';
@@ -23,7 +24,8 @@ import { MyApp } from './app.component';
         CacheModule.forRoot(),
         IonicModule.forRoot(MyApp),
         PeoplePageModule,
-        PersonPageModule
+        PersonPageModule,
+        MachinePageModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [

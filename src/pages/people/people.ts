@@ -22,7 +22,7 @@ export class PeoplePage {
     curSearch: string;
 
     constructor(
-        private navCtrl: NavController, 
+        private navCtrl: NavController,
         private navParams: NavParams,
         private swapiProvider: SwapiProvider,
         private toast: ToastController
@@ -37,7 +37,7 @@ export class PeoplePage {
         let loading = this.toast.create({
             message: search ? 'Searching...' : 'Loading...'
         });
-        loading.present().then(() => 
+        return loading.present().then(() => 
             this.swapiProvider.searchPeople(search).then(res => {
                 this.items = res.results;
                 this.next = res.next;
@@ -65,9 +65,9 @@ export class PeoplePage {
         }
     }
 
-    forceReload() {
+    forceReload(refresher) {
         this.swapiProvider.clearCache(SWAPI_CACHE_KEYS.people);
-        this.load();
+        this.load().then(() => refresher.complete());
     }
 
     viewDetails(person: Person) {

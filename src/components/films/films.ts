@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ToastController } from 'ionic-angular';
 
-import { Film, SwapiProvider } from '../../providers/swapi/swapi';
+import { Film, SwapiProvider, Person } from '../../providers/swapi/swapi';
 
 /**
  * Generated class for the FilmsComponent component.
@@ -15,13 +15,13 @@ import { Film, SwapiProvider } from '../../providers/swapi/swapi';
 })
 export class FilmsComponent {
 
-    films: Film[];
-
-    @Input() set url(url: string) {
-        if (url) {
-            this.load(url);
+    @Input() set person(p: Person) {
+        if (p) {
+            this.load(p.films);
         }
     }
+
+    films: Film[];
 
     constructor(
         private swapiProvider: SwapiProvider,
@@ -29,11 +29,11 @@ export class FilmsComponent {
     ) {
     }
 
-    load(url: string) {
+    load(urls: string[]) {
         let loading = this.toast.create({
-            message: 'Loading Films...'
+            message: 'Loading films...'
         });
-        loading.present().then(() => this.getFilms(url))
+        loading.present().then(() => this.getFilms(urls))
             .then(fs => {
                 this.films = fs;
                 this.films.sort((a, b) => a.episode_id > b.episode_id ? 1 : -1);
@@ -41,12 +41,9 @@ export class FilmsComponent {
             .then(() => loading.dismiss());
     }
 
-    getFilms(url: string) {
-        return this.swapiProvider.getPerson(url)
-            .then(p => {
-                const filmPromises = p.films.map(v => this.swapiProvider.getFilm(v));
-                return Promise.all(filmPromises);
-            });
+    getFilms(urls: string[]): Promise<Film[]> {
+        const filmPromises = urls.map(v => this.swapiProvider.getFilm(v));
+        return Promise.all(filmPromises);
     }
 
 }

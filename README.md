@@ -41,11 +41,14 @@ ionic cordova build android
 #### Run
 
 On attached device:
+* [Enable USB debugging and Developer Mode on your Android device](https://developer.android.com/studio/run/device#developer-device-options)
+
 ```
 ionic cordova run android --device
 ```
 
 On emulator:
+
 ```
 ionic cordova emulate android
 ```

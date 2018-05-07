@@ -18,8 +18,8 @@
 
     <ion-row>
         <ion-col col-12 col-md-8 col-lg-6 col-xl-4 offset-md-2 offset-lg-3 offset-xl-4>
-            <ion-toolbar>
-                <ion-searchbar [(ngModel)]="curSearch" (ionInput)="search($event)" placeholder="Search Characters..." showCancelButton color="danger"></ion-searchbar>
+            <ion-toolbar color="primary">
+                <ion-searchbar [(ngModel)]="curSearch" (ionInput)="search($event)" placeholder="Search Characters..." debounce="1000"></ion-searchbar>
                 <ion-badge color="warning" *ngIf="curSearch && curSearch.length < 2">Input at least 2 letters to search...</ion-badge>
             </ion-toolbar>
             

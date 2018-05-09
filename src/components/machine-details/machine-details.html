@@ -17,26 +17,26 @@
         <ion-label>Manufacturer</ion-label>
         <ion-badge item-right>{{machine.manufacturer}}</ion-badge>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="machine.cost_in_credits != 'unknown'">
         <ion-icon item-start class="custom">
             <img src="assets/imgs/cred.png" />
         </ion-icon>
         <ion-label>Cost</ion-label>
-        <ion-badge item-right>{{machine.cost_in_credits}} {{machine.cost_in_credits && machine.cost_in_credits !== 'unknown' ? 'Credits' : ''}}</ion-badge>
+        <ion-badge item-right>{{machine.cost_in_credits | number}} Credits</ion-badge>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="machine.length != 'unknown'">
         <ion-icon item-start class="custom">📏</ion-icon>
         <ion-label>Length</ion-label>
-        <ion-badge item-right>{{machine.length}} meters</ion-badge>
+        <ion-badge item-right>{{machine.length | number}} meters</ion-badge>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="machine.crew != 'unknown'">
         <ion-icon name="people" item-start></ion-icon>
         <ion-label>Crew Capacity</ion-label>
-        <ion-badge item-right>{{machine.crew}}</ion-badge>
+        <ion-badge item-right>{{machine.crew | number}}</ion-badge>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="machine.passengers != 'unknown'">
         <ion-icon name="train" item-start></ion-icon>
         <ion-label>Passenger Capacity</ion-label>
-        <ion-badge item-right>{{machine.passengers}}</ion-badge>
+        <ion-badge item-right>{{machine.passengers | number}}</ion-badge>
     </ion-item>
 </ion-list>

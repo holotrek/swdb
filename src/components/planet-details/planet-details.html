@@ -1,9 +1,9 @@
 <ion-list *ngIf="planet">
     <h2>{{planet.name}}</h2>
-    <ion-item>
+    <ion-item *ngIf="planet.population != 'unknown'">
         <ion-icon name="people" item-start></ion-icon>
         <ion-label>Population</ion-label>
-        <ion-badge item-right>{{planet.population}}</ion-badge>
+        <ion-badge item-right>{{planet.population | number}}</ion-badge>
     </ion-item>
     <ion-item>
         <ion-icon name="partly-sunny" item-start></ion-icon>
@@ -17,24 +17,24 @@
         <ion-label>Terrain</ion-label>
         <ion-badge item-right>{{planet.terrain}}</ion-badge>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="planet.diameter != 'unknown'">
         <ion-icon name="disc" item-start></ion-icon>
         <ion-label>Diameter</ion-label>
-        <ion-badge item-right>{{planet.diameter}} km</ion-badge>
+        <ion-badge item-right>{{planet.diameter | number}} km</ion-badge>
     </ion-item>
     <ion-item>
         <ion-icon name="arrow-round-down" item-start></ion-icon>
         <ion-label>Gravity</ion-label>
         <ion-badge item-right>{{planet.gravity}} unit</ion-badge>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="planet.rotation_period != 'unknown'">
         <ion-icon name="refresh-circle" item-start></ion-icon>
         <ion-label>Day Length</ion-label>
-        <ion-badge item-right>{{planet.rotation_period}} standard hours</ion-badge>
+        <ion-badge item-right>{{planet.rotation_period | number}} standard hours</ion-badge>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="planet.orbital_period != 'unknown'">
         <ion-icon name="calendar" item-start></ion-icon>
         <ion-label>Year Length</ion-label>
-        <ion-badge item-right>{{planet.orbital_period}} standard days</ion-badge>
+        <ion-badge item-right>{{planet.orbital_period | number}} standard days</ion-badge>
     </ion-item>
 </ion-list>

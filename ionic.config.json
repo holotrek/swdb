@@ -1,6 +1,6 @@
 {
   "name": "SWdb",
-  "app_id": "",
+  "app_id": "545e1e4a",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

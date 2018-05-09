@@ -1,6 +1,6 @@
 {
-  "name": "star-wars-pe",
-  "version": "0.0.1.alpha-1",
+  "name": "swdb",
+  "version": "0.0.1",
   "author": "Evan Kaiser",
   "homepage": "https://holotrek.github.io/",
   "description": "A directory of Star Wars information in your pocket. Data provided by Star Wars API (https://swapi.co).",

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Star Wars PE (Pocket Edition)</name>
+    <name>SWdb</name>
     <description>A directory of Star Wars information in your pocket. Data provided by Star Wars API (https://swapi.co).</description>
     <author email="evshell18@gmail.com" href="https://holotrek.github.io/">Evan Kaiser</author>
     <content src="index.html" />

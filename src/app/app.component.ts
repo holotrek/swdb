@@ -24,11 +24,6 @@ export class MyApp {
     ) {
         this.initializeApp();
 
-        // used for an example of ngFor and navigation
-        this.pages = [
-            { title: 'Characters', component: PeoplePage, icon: 'contacts' }
-        ];
-
     }
 
     initializeApp() {

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
-import { SwapiProvider, Person } from '../../providers/swapi/swapi';
+import { HttpAlertProvider } from '../../providers/http-alert/http-alert';
+import { Person, SwapiProvider } from '../../providers/swapi/swapi';
 
 /**
  * Generated class for the PersonPage page.
@@ -24,7 +25,8 @@ export class PersonPage {
         private navCtrl: NavController,
         private navParams: NavParams,
         private swapiProvider: SwapiProvider,
-        private toast: ToastController
+        private toast: ToastController,
+        private alert: HttpAlertProvider
     ) {
         this.randomImage = Math.floor(Math.random() * 9) + 1;
     }
@@ -39,7 +41,12 @@ export class PersonPage {
             message: 'Loading details...'
         });
         this.person = loading.present().then(() => this.swapiProvider.getPerson(url));
-        this.person.then(() => loading.dismiss());
+        this.person
+            .then(() => loading.dismiss())
+            .catch(err => {
+                loading.dismiss();
+                this.alert.showHttpErrorAlert();
+            });
     }
 
 }

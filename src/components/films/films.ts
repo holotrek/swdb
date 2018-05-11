@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { ToastController } from 'ionic-angular';
 
-import { Film, SwapiProvider, Person } from '../../providers/swapi/swapi';
+import { HttpAlertProvider } from '../../providers/http-alert/http-alert';
+import { Film, Person, SwapiProvider } from '../../providers/swapi/swapi';
 
 /**
  * Generated class for the FilmsComponent component.
@@ -25,7 +26,8 @@ export class FilmsComponent {
 
     constructor(
         private swapiProvider: SwapiProvider,
-        private toast: ToastController
+        private toast: ToastController,
+        private alert: HttpAlertProvider
     ) {
     }
 
@@ -38,7 +40,11 @@ export class FilmsComponent {
                 this.films = fs;
                 this.films.sort((a, b) => a.episode_id > b.episode_id ? 1 : -1);
             })
-            .then(() => loading.dismiss());
+            .then(() => loading.dismiss())
+            .catch(err => {
+                loading.dismiss();
+                this.alert.showHttpErrorAlert();
+            });
     }
 
     getFilms(urls: string[]): Promise<Film[]> {

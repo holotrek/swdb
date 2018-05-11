@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { ToastController, NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 
-import { Person, Planet, SwapiProvider } from '../../providers/swapi/swapi';
 import { HomeworldPage } from '../../pages/homeworld/homeworld';
+import { HttpAlertProvider } from '../../providers/http-alert/http-alert';
+import { Person, Planet, SwapiProvider } from '../../providers/swapi/swapi';
 
 /**
  * Generated class for the OriginComponent component.
@@ -31,7 +32,8 @@ export class OriginComponent {
     constructor(
         private navCtrl: NavController,
         private swapiProvider: SwapiProvider,
-        private toast: ToastController
+        private toast: ToastController,
+        private alert: HttpAlertProvider
     ) {
     }
 
@@ -40,7 +42,12 @@ export class OriginComponent {
             message: 'Loading origin...'
         });
         this.homeworld = loading.present().then(() => this.swapiProvider.getPlanet(this.person.homeworld));
-        this.homeworld.then(() => loading.dismiss());
+        this.homeworld
+            .then(() => loading.dismiss())
+            .catch(err => {
+                loading.dismiss();
+                this.alert.showHttpErrorAlert();
+            });
     }
 
     viewPlanet(h: Planet) {

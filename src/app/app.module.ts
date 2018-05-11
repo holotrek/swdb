@@ -12,6 +12,7 @@ import { PeoplePageModule } from '../pages/people/people.module';
 import { PersonPageModule } from '../pages/person/person.module';
 import { SwapiProvider } from '../providers/swapi/swapi';
 import { MyApp } from './app.component';
+import { HttpAlertProvider } from '../providers/http-alert/http-alert';
 
 @NgModule({
     declarations: [
@@ -35,7 +36,8 @@ import { MyApp } from './app.component';
         StatusBar,
         SplashScreen,
         { provide: ErrorHandler, useClass: IonicErrorHandler },
-        SwapiProvider
+        SwapiProvider,
+    HttpAlertProvider
     ]
 })
 export class AppModule { }

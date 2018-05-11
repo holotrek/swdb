@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
+import { HttpAlertProvider } from '../../providers/http-alert/http-alert';
 import { Person, SWAPI_CACHE_KEYS, SwapiProvider } from '../../providers/swapi/swapi';
 import { PersonPage } from '../person/person';
 
@@ -20,12 +21,14 @@ export class PeoplePage {
     items: Person[];
     next: string;
     curSearch: string;
+    searching: boolean;
 
     constructor(
         private navCtrl: NavController,
         private navParams: NavParams,
         private swapiProvider: SwapiProvider,
-        private toast: ToastController
+        private toast: ToastController,
+        private alert: HttpAlertProvider
     ) {
     }
 
@@ -33,16 +36,20 @@ export class PeoplePage {
         this.load();
     }
 
-    load(search?: string) {
+    load() {
         let loading = this.toast.create({
-            message: search ? 'Searching...' : 'Loading...'
+            message: 'Loading...'
         });
         return loading.present().then(() => 
-            this.swapiProvider.searchPeople(search).then(res => {
+            this.swapiProvider.searchPeople().then(res => {
                 this.items = res.results;
                 this.next = res.next;
             }))
-            .then(() => loading.dismiss());
+            .then(() => loading.dismiss())
+            .catch(err => {
+                loading.dismiss();
+                this.alert.showHttpErrorAlert();
+            });
     }
 
     loadMore(): Promise<any> {
@@ -52,16 +59,16 @@ export class PeoplePage {
         return this.swapiProvider.getPeople(this.next).then(res => {
             this.items = this.items.concat(res.results);
             this.next = res.next;
-        });
+        }).catch(err => this.alert.showHttpErrorAlert());
     }
 
     search($event) {
         const term = $event.target.value;
         if (term && term.length > 1) {
-            this.load(term);
+            this.doSearch(term);
         }
         else if (!term) {
-            this.load();
+            this.doSearch();
         }
     }
 
@@ -74,6 +81,18 @@ export class PeoplePage {
         this.navCtrl.push(PersonPage, {
             name: person.name,
             url: person.url
+        });
+    }
+
+    private doSearch(search?: string) {
+        this.searching = true;
+        this.swapiProvider.searchPeople(search).then(res => {
+            this.items = res.results;
+            this.next = res.next;
+            this.searching = false;
+        }).catch(err => {
+            this.searching = false;
+            this.alert.showHttpErrorAlert();
         });
     }
 }

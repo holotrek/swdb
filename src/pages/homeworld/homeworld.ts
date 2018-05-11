@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
-import { SwapiProvider, Planet } from '../../providers/swapi/swapi';
+import { HttpAlertProvider } from '../../providers/http-alert/http-alert';
+import { Planet, SwapiProvider } from '../../providers/swapi/swapi';
 
 /**
  * Generated class for the HomeworldPage page.
@@ -23,7 +24,8 @@ export class HomeworldPage {
         private navCtrl: NavController,
         private navParams: NavParams,
         private swapiProvider: SwapiProvider,
-        private toast: ToastController
+        private toast: ToastController,
+        private alert: HttpAlertProvider
     ) {
     }
 
@@ -37,6 +39,11 @@ export class HomeworldPage {
             message: 'Loading details...'
         });
         this.homeworld = loading.present().then(() => this.swapiProvider.getPlanet(url));
-        this.homeworld.then(() => loading.dismiss());
+        this.homeworld
+            .then(() => loading.dismiss())
+            .catch(err => {
+                loading.dismiss();
+                this.alert.showHttpErrorAlert();
+            });
     }
 }

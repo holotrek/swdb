@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
 
 import { MachinePage } from '../../pages/machine/machine';
+import { HttpAlertProvider } from '../../providers/http-alert/http-alert';
 import { Machine, Person, SwapiProvider } from '../../providers/swapi/swapi';
 
 /**
@@ -40,7 +41,8 @@ export class MachinesComponent {
     constructor(
         private navCtrl: NavController,
         private swapiProvider: SwapiProvider,
-        private toast: ToastController
+        private toast: ToastController,
+        private alert: HttpAlertProvider
     ) {
     }
 
@@ -52,7 +54,11 @@ export class MachinesComponent {
             });
             loading.present().then(() => this.getMachines(urls))
                 .then(ms => this.machines = ms)
-                .then(() => loading.dismiss());
+                .then(() => loading.dismiss())
+                .catch(err => {
+                    loading.dismiss();
+                    this.alert.showHttpErrorAlert();
+                });
         }
     }
 

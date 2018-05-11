@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { SwapiProvider } from '../../providers/swapi/swapi';
+import { HttpAlertProvider } from '../../providers/http-alert/http-alert';
 
 /**
  * Generated class for the SpeciesNameComponent component.
@@ -23,12 +24,15 @@ export class SpeciesNameComponent {
     }
 
     constructor(
-        private swapiProvider: SwapiProvider
+        private swapiProvider: SwapiProvider,
+        private alert: HttpAlertProvider
     ) {
     }
 
     load(url: string) {
-        this.swapiProvider.getSpecie(url).then(s => this.name = s.name);
+        this.swapiProvider.getSpecie(url)
+            .then(s => this.name = s.name)
+            .catch(err => this.alert.showHttpErrorAlert());
     }
 
 }
